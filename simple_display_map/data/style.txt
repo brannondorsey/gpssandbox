@@ -1,0 +1,13 @@
+&style=feature:all|element:labels|visibility:off
+
+&style=feature:road|element:geometry|color:0xcccccc|weight:.3|visibility:on
+
+&style=feature:landscape|element:geometry.fill|color:0xffffff|visibility:on
+
+&style=feature:poi.park|visibility:off
+
+&style=feature:poi|element:geometry|color:0xbebebe|stroke:1
+
+&style=feature:road|visibility:off;
+
+&style=feature:water|color:0x626262
