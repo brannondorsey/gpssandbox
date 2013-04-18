@@ -1,21 +1,13 @@
-&style=feature:road|Celement:geometry|color:0xcccccc|weight:.3|visibility:on
+&style=feature:all|element:labels|visibility:off
 
-&style=feature:landscape|Celement:geometry.fill|color:0xffffff|visibility:on
+&style=feature:road|element:geometry|color:0xcccccc|weight:.3|visibility:on
 
-&style=feature:administrative|Celement:labels|weight:3.9|visibility:on|invert_lightness:true
-
-&style=feature:poi|element:labels|visibility:off
+&style=feature:landscape|element:geometry.fill|color:0xffffff|visibility:on
 
 &style=feature:poi.park|visibility:off
 
 &style=feature:poi|element:geometry|color:0xbebebe|stroke:1
 
-&style=feature:road|element:labels|visibility:off
-
 &style=feature:road|visibility:off;
-
-&style=feature:transit|element:labels|visibility:off
-
-&style=feature:administrative|element:labels|visibility:off
 
 &style=feature:water|color:0x626262
