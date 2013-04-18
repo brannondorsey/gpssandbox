@@ -21,7 +21,7 @@ UnfoldingMap map;
 
 void setup(){
   size(800, 600, GLConstants.GLGRAPHICS);
-  map = new UnfoldingMap(this, new Stamen.TonerProvider());
+  map = new UnfoldingMap(this, new OpenStreetMap.CloudmadeProvider("038dee0bec3441f495c0dee8b72467fd", 93093));
   MapUtils.createDefaultEventDispatcher(this, map);
 }
 
