@@ -18,15 +18,30 @@ import de.fhpotsdam.unfolding.providers.*;
 
 
 UnfoldingMap map;
+SimplePointMarker chicagoMarker;
 
 void setup(){
+  int zoom = 14;
+  float latitude = 41.8500;
+  float longitude = -87.6500;
+  float maxPanningDistance = 30; // in km
+
   size(800, 600, GLConstants.GLGRAPHICS);
+  noStroke();
   map = new UnfoldingMap(this, new OpenStreetMap.CloudmadeProvider("038dee0bec3441f495c0dee8b72467fd", 93093));
   MapUtils.createDefaultEventDispatcher(this, map);
+  Location chicago = new Location(latitude, longitude);
+  map.zoomAndPanTo(chicago, zoom);
+  map.setPanningRestriction(chicago, maxPanningDistance);
+  chicagoMarker = new SimplePointMarker(chicago);
+  map.addMarkers(chicagoMarker);
 }
 
 void draw(){
    map.draw(); 
+   ScreenPosition chicagoPosition = chicagoMarker.getScreenPosition(map);
+   fill(255, 0, 0, 100);
+   ellipse(chicagoPosition.x, chicagoPosition.y, 10, 10);
    Location location = map.getLocation(mouseX, mouseY);
    fill(0);
    text(location.getLat()+", "+location.getLon(), mouseX, mouseY);
