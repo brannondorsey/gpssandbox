@@ -1,5 +1,3 @@
-import processing.opengl.*;
-import codeanticode.glgraphics.*;
 import de.fhpotsdam.unfolding.mapdisplay.*;
 import de.fhpotsdam.unfolding.utils.*;
 import de.fhpotsdam.unfolding.marker.*;
@@ -14,40 +12,34 @@ import de.fhpotsdam.unfolding.texture.*;
 import de.fhpotsdam.unfolding.events.*;
 import de.fhpotsdam.utils.*;
 import de.fhpotsdam.unfolding.providers.*;
-import de.fhpotsdam.unfolding.providers.*;
-
+import processing.opengl.*;
+import codeanticode.glgraphics.*;
 
 UnfoldingMap map;
-GpxHandler gpxHandler;
-SimplePointMarker chicagoMarker;
+GPXHandler gpxHandler;
+Location[] pts;
+SimpleLinesMarker linePoints;
 
-void setup(){
+void setup() {
   size(800, 600, GLConstants.GLGRAPHICS);
   noStroke();
   
-  int zoom = 14;
-  float latitude = 41.8500;
-  float longitude = -87.6500;
-  float maxPanningDistance = 30; // in km
-  
+  int maxPanningDistance = 10; // in km
+  int zoom = 12;
+
   map = new UnfoldingMap(this, new OpenStreetMap.CloudmadeProvider("038dee0bec3441f495c0dee8b72467fd", 93093));
-  List<Feature> parsedGpx = GPXReader.loadData(this, "sample.gpx");
-  gpxHandler = new GpxHandler(parsedGpx);
   MapUtils.createDefaultEventDispatcher(this, map);
-  Location chicago = new Location(latitude, longitude);
-  map.zoomAndPanTo(chicago, zoom);
-  map.setPanningRestriction(chicago, maxPanningDistance);
-  chicagoMarker = new SimplePointMarker(chicago);
-  map.addMarkers(chicagoMarker);
+  List<Feature> parsedData = GeoJSONReader.loadData(this, "all(1).geojson");
+  gpxHandler = new GPXHandler(parsedData);
   
+  Location cent = gpxHandler.getCenter();
+  map.zoomAndPanTo(cent, zoom);
+  map.setPanningRestriction(cent, maxPanningDistance);
+  linePoints = new SimpleLinesMarker(gpxHandler.pts);
 }
 
-void draw(){
-   map.draw(); 
-   ScreenPosition chicagoPosition = chicagoMarker.getScreenPosition(map);
-   fill(255, 0, 0, 100);
-   ellipse(chicagoPosition.x, chicagoPosition.y, 10, 10);
-   Location location = map.getLocation(mouseX, mouseY);
-   fill(0);
-   text(location.getLat()+", "+location.getLon(), mouseX, mouseY);
+void draw() {
+  map.addMarkers(linePoints);
+  map.draw();
 }
+
