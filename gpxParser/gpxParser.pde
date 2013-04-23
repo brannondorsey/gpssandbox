@@ -6,10 +6,10 @@ void setup() {
   gpxDoc = new XMLElement(this, "marathon.xml");
 
   int numEntries = gpxDoc.getChildCount();
-  println(numEntries);
+ // println(numEntries);
   for (int i = 0; i < numEntries; i++) {
     XMLElement allChildren = gpxDoc.getChild(i);
-    println(allChildren);
+    //println(allChildren);
   }
   XMLElement trk = gpxDoc.getChild(2);
   XMLElement[] trkseg = trk.getChild(2).getChildren();
@@ -26,6 +26,9 @@ void setup() {
   }
   for (int i = 0; i < trkpts.length; i++) {
     println("this trackpoints lat is "+trkpts[i].lat);
+    println("this trackpoints lon is "+trkpts[i].lon);
+    println("this trackpoints timestamp is "+trkpts[i].timestamp);
+    println();
   }
 }
 
